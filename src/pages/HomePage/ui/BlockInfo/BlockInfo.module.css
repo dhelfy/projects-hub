@@ -1,0 +1,51 @@
+.blockInfo {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+}
+
+.mainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+}
+
+.mainText {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mainText p {
+    font-size: 32px;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+@media (max-width: 1000px) {
+    .mainInfo {
+        gap: 45px;
+    }
+
+    .blockInfo img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 775px) {
+    .blockInfo img {
+        display: none;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .mainText p {
+        font-size: 24px;
+    }
+}

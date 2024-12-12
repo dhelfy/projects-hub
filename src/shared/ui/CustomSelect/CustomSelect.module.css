@@ -1,0 +1,10 @@
+.customSelect {
+    outline: none;
+    border: none;
+    background-color: #E9E9E9;
+    color: #767676;
+    font-size: 32px;
+    font-weight: 300;
+    border-radius: 5px;
+    padding: 5px;
+}

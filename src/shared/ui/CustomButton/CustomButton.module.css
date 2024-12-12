@@ -1,0 +1,31 @@
+.customButtonDark,
+ .customButtonLight {
+    padding: 20px;
+    font-weight: 500;
+    transition:0.3s;
+    cursor: pointer;
+    max-width: fit-content;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.customButtonDark {
+    background-color: #232323;
+    color: #fff;
+}
+
+.customButtonDark:hover {
+    transition:0.3s;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+}
+
+.customButtonLight {
+    background-color: #fff;
+    color: #232323;
+}
+
+.customButtonLight:hover {
+    transition:0.3s;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+}
