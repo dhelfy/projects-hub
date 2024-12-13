@@ -1,0 +1,27 @@
+.cvInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.cvInfo p{
+    font-size: 32px;
+}
+
+.cvInfo a{
+    font-size: 32px;
+    color: #6F02CE;
+    text-decoration: none;
+}
+
+.links {
+    display: flex;
+    gap: 25px;
+}
+
+
+.blockButtons {
+    margin-top: 100px;
+    display: flex;
+    gap: 30px;
+}

@@ -1,11 +1,16 @@
-import {call, put, takeEvery, delay} from "typed-redux-saga"
+import {call, put, takeEvery} from "typed-redux-saga"
 import { fetchCards, fetchCardsSuccess } from "../state/slices/cardSlice.ts"
-import { cards } from "../data/cards.ts"
+import { getAllCards } from "../API/cardsAPI.ts"
 
 function* workFetchCards(): Generator<unknown, void> {
-    yield delay(1000);
-    
-    yield put(fetchCardsSuccess(cards))
+    try {
+        const response = {data: yield* call(getAllCards)}
+
+        const cards = response.data
+        yield put(fetchCardsSuccess(cards))
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 function* cardSaga () {

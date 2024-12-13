@@ -5,7 +5,6 @@ interface CardState {
     cards: IStudentCard[];
     filteredCards: IStudentCard[];
     isLoading: boolean;
-    currentCard: IStudentCard | null;
     activeFilters: {
         [key: string]: string | undefined
     };
@@ -14,7 +13,6 @@ interface CardState {
 const initialState: CardState = {
     cards: [],
     filteredCards: [],
-    currentCard: null,
     isLoading: false,
     activeFilters: {}
 };
@@ -27,7 +25,7 @@ const cardSlice = createSlice({
         fetchCards: (state) => {
             state.isLoading = true
         },
-        fetchCardsSuccess: (state, action) => {
+        fetchCardsSuccess: (state, action: PayloadAction<IStudentCard[]>) => {
             state.cards = action.payload
             state.filteredCards = action.payload
             state.isLoading = false
@@ -50,7 +48,7 @@ const cardSlice = createSlice({
             // Применяем фильтры
             state.filteredCards = state.cards.filter((card) => {
                 return Object.entries(state.activeFilters).every(([filterName, filterValue]) => {
-                    return card[filterName as keyof IStudentCard] === filterValue;
+                    return card[filterName as keyof IStudentCard] === filterValue
                 });
             });
         }

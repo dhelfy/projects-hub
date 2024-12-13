@@ -1,3 +1,8 @@
+export interface link {
+    link: string;
+    name: string;
+}
+
 export interface IStudentCard {
     id: number;
     userId: number,
@@ -7,7 +12,7 @@ export interface IStudentCard {
     telegram: string;
     skills: string;
     additionalInfo: string;
-    socials: [];
+    socials: link[];
 }
 
 export interface IOptions {
