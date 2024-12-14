@@ -48,7 +48,7 @@ export const Header: FC = () => {
                     isAuth ?
                         <>
                             <NavLink to="/projects" className={active}>Поиск проектов</NavLink>
-                            <NavLink to="/participants" className={active}>Поиск участников</NavLink>
+                            <NavLink to="/cvs" className={active}>Поиск участников</NavLink>
                             <img src="/user.png" height="40px" width="40px" />
                             <button
                                 className={styles.loginButton}
@@ -60,7 +60,7 @@ export const Header: FC = () => {
                         :
                         <>
                             <NavLink to="/projects" className={active}>Поиск проектов</NavLink>
-                            <NavLink to="/participants" className={active}>Поиск участников</NavLink>
+                            <NavLink to="/cvs" className={active}>Поиск участников</NavLink>
                             <button
                                 className={styles.loginButton}
                                 onClick={() => dispatch(setVisible({ name: 'authModal' }))}

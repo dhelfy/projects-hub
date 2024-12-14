@@ -1,0 +1,16 @@
+.filtersBlock {
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+    gap: 20px;
+    border-radius: 5px;
+    border: 1px solid #232323;
+    padding: 20px;
+    max-height: fit-content;
+}
+
+@media (max-width: 1024px) {
+    .filtersBlock {
+        max-width: none;   
+    }
+}

@@ -9,7 +9,9 @@ export let users = [
         cv: [
             1
         ],
-        projects: []
+        projects: [
+            1
+        ]
     },
     {
         name: "Максим",
@@ -21,7 +23,9 @@ export let users = [
         cv: [
             2
         ],
-        projects: []
+        projects: [
+            2
+        ]
     },
     {
         name: "Мария",
@@ -33,7 +37,9 @@ export let users = [
         cv: [
             3
         ],
-        projects: []
+        projects: [
+            3
+        ]
     },
     {
         name: "Александр",
@@ -45,7 +51,9 @@ export let users = [
         cv: [
             4
         ],
-        projects: []
+        projects: [
+            4
+        ]
     },
     {
         name: "Ксения",
@@ -57,7 +65,9 @@ export let users = [
         cv: [
             5
         ],
-        projects: []
+        projects: [
+            5
+        ]
     },
     {
         name: "Иван",
@@ -69,6 +79,8 @@ export let users = [
         cv: [
             6
         ],
-        projects: []
+        projects: [
+            6
+        ]
     },
 ]

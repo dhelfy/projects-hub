@@ -1,6 +1,11 @@
-.cardList {
+.projectsList {
     display: flex;
     flex-wrap: wrap;
     gap: 35px;
     justify-content: flex-start;
+}
+
+.needs {
+    display: flex;
+    flex-wrap: wrap;
 }

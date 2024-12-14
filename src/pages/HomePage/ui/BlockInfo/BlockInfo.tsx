@@ -11,7 +11,7 @@ export const BlockInfo: FC<BlockInfoProps> = ({onScrollToVacancies}) => {
         <div className={styles.blockInfo}>
             <div className={styles.mainInfo}>
                 <div className={styles.mainText}>
-                    <h1>
+                    <h1 className={styles.pageHeading}>
                         Легкий способ<br />
                         найти людей <br />
                         в свою команду

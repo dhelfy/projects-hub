@@ -1,0 +1,14 @@
+.mainContent {
+    display: flex;
+    gap: 50px;
+}
+
+.pageHeading {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+    .mainContent {
+        flex-direction: column;
+    }
+}

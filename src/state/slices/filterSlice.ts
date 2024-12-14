@@ -8,6 +8,7 @@ interface IFilterState {
         specialityOptions: IOptions[];
         courseOptions: IOptions[];
         noveltyOptions: IOptions[];
+        needsOptions: IOptions[];
     }]
 }
 
@@ -16,6 +17,7 @@ const initialState: IFilterState = {
         speciality: '',
         course: '',
         novelty: '',
+        needs: '',
     },
     options: [
         {
@@ -35,6 +37,13 @@ const initialState: IFilterState = {
             noveltyOptions: [
                 {text: 'Новые', value: 'new'}, 
                 {text: 'Старые', value: 'old'}
+            ],
+            needsOptions: [
+                {text: 'Frontend', value: 'Frontend'}, 
+                {text: 'Backend', value: 'Backend'},
+                {text: 'Design', value: 'Design'},
+                {text: 'PM', value: 'Project Manager'},
+                {text: 'Не имеет значения', value: ''}
             ]
         }
     ]

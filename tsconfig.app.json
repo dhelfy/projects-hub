@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "mock_data/cards.ts", "mock_data/users.ts"]
+  "include": ["src", "mock_data/cvs.ts", "mock_data/users.ts"]
 }

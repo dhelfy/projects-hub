@@ -1,11 +1,15 @@
 import { all } from "redux-saga/effects";
-import cardSaga from "./cardSaga";
+import cvSaga from "./cvSaga";
 import cardPageSaga from "./cardPageSaga";
+import projectsSaga from "./projectsSaga";
+import projectPageSaga from "./projectPageSaga"
 
 // корневая сага
 export default function* rootSaga() {
     yield all([
-        cardSaga(),
-        cardPageSaga()
+        cvSaga(),
+        cardPageSaga(),
+        projectsSaga(),
+        projectPageSaga()
     ])
 }

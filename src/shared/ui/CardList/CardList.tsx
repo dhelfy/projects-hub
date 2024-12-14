@@ -19,7 +19,7 @@ export const CardList: FC = () => {
         <div className={styles.cardList}>
             {cards.map((card) => {
                 return (
-                    <Card heading={card.heading} navigateTo={`/cvs/${card.id}`} key={card.telegram}>
+                    <Card heading={card.heading} navigateTo={`/cvs/${card.id}`} key={card.id}>
                         <p>{card.speciality}</p>
                         <p>{card.course}</p>
                         <p>{card.telegram}</p>

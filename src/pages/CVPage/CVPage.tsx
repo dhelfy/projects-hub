@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
-import { fetchCard } from "../../state/slices/cardPageSlice";
+import { fetchCv } from "../../state/slices/cardPageSlice";
 import { selectCard } from "../../state/selectors/cardPageSelector";
 import { CustomButton } from "../../shared/ui/CustomButton/CustomButton";
 import styles from "./CVPage.module.css"
@@ -22,7 +22,7 @@ export const CVPage: FC = () => {
 
     useEffect(() => {
         if (params.id) {
-            dispatch(fetchCard(Number(params.id)));
+            dispatch(fetchCv(Number(params.id)));
         }
     }, [params.id]);
 
@@ -69,7 +69,7 @@ export const CVPage: FC = () => {
                                 color="dark"
                                 onClick={() => navigate(-1)}
                             >
-                                Назад к проектам
+                                Назад к резюме
                             </CustomButton>
                         </>
                         :
@@ -77,7 +77,7 @@ export const CVPage: FC = () => {
                             color="dark"
                             onClick={() => navigate(-1)}
                         >
-                            Назад к проектам
+                            Назад к резюме
                         </CustomButton>
                 }
             </div>

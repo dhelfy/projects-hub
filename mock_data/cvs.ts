@@ -1,6 +1,6 @@
 import { IStudentCard } from "../src/types/types";
 
-export let cards: IStudentCard[] = [
+export let cvs: IStudentCard[] = [
     {
         userId: 1,
         id: 1,

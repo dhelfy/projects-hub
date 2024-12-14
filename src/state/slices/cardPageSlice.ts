@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IStudentCard } from "../../types/types";
 
 interface cardPageSliceState {
-    card: IStudentCard | null;
+    cv: IStudentCard | null;
     isLoading: boolean;
 }
 
 const initialState: cardPageSliceState = {
-    card: null,
+    cv: null,
     isLoading: false,
 }
 
@@ -15,20 +15,19 @@ const cardPageSlice = createSlice({
     name: "currentCard",
     initialState,
     reducers: {
-        fetchCard: (state, action: PayloadAction<number>) => {
-            state.isLoading = true;
+        fetchCv: (state, action: PayloadAction<number>) => {
+            state.isLoading = true
         },
-        fetchCardSuccess: (state, action: PayloadAction<IStudentCard>) => {
-            console.log("Reducer fetchCardSuccess payload:", action.payload); // Логируем payload
-            state.card = action.payload;
-            state.isLoading = false;
+        fetchCvSuccess: (state, action: PayloadAction<IStudentCard>) => {
+            state.cv = action.payload
+            state.isLoading = false
         },
         
-        fetchCardFailure: (state) => {
+        fetchCvFailure: (state) => {
             state.isLoading = false
         },
     }
 })
 
 export default cardPageSlice.reducer
-export const {fetchCard, fetchCardSuccess, fetchCardFailure} = cardPageSlice.actions
+export const {fetchCv, fetchCvSuccess, fetchCvFailure} = cardPageSlice.actions
