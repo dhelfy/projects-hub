@@ -3,6 +3,7 @@ import cvSaga from "./cvSaga";
 import cardPageSaga from "./cardPageSaga";
 import projectsSaga from "./projectsSaga";
 import projectPageSaga from "./projectPageSaga"
+import userSaga from "./userSaga";
 
 // корневая сага
 export default function* rootSaga() {
@@ -10,6 +11,7 @@ export default function* rootSaga() {
         cvSaga(),
         cardPageSaga(),
         projectsSaga(),
-        projectPageSaga()
+        projectPageSaga(),
+        userSaga()
     ])
 }

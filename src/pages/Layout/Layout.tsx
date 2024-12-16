@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { Header } from "./ui/Header/Header"
-import { FC } from "react"
+import { FC, useState } from "react"
 import styles from "./Layout.module.css"
 import { Modal } from "../../shared/ui/Modal/Modal"
 import { selectModalByName } from "../../state/selectors/modalSelector"
@@ -13,6 +13,8 @@ import { login } from "../../state/slices/authSlice"
 export const Layout: FC = () => {
     const modal = useSelector(selectModalByName('authModal'))
     const dispatch = useDispatch()
+    let [loginState, setLoginState] = useState('petrov.a')
+    let [passwordState, setPasswordState] = useState('')
 
     return (
         <>
@@ -24,14 +26,14 @@ export const Layout: FC = () => {
                 visible={modal?.visible ?? false}
                 setVisible={() => dispatch(setVisible({ name: 'authModal' }))}
                 onClickAction={() => {
-                    dispatch(login())
+                    dispatch(login({login: loginState}))
                     dispatch(setVisible({ name: 'authModal' }))
                 }}
             >
                 <label htmlFor="login">Логин</label>
-                <CustomInput type="text" placeholder="Логин" />
+                <CustomInput type="text" placeholder="Логин" onChange={(e) => setLoginState(e.currentTarget.value)} value={loginState}/>
                 <label htmlFor="password">Пароль</label>
-                <CustomInput type="password" placeholder="Пароль" />
+                <CustomInput type="password" placeholder="Пароль" onChange={(e) => setPasswordState(e.currentTarget.value)} value={passwordState}/>
             </Modal>
 
             <main className={styles.mainSection}>

@@ -7,6 +7,7 @@ import { selectIsAuth } from "../../../../state/selectors/authSelector";
 import { setVisible } from "../../../../state/slices/modalSlice";
 import { selectModalByName } from "../../../../state/selectors/modalSelector";
 import { ModalAccepting } from "../../../../shared/ui/ModalAccepting/ModalAccepting";
+import { clearUser } from "../../../../state/slices/userSlice";
 
 export const Header: FC = () => {
     const active = ({ isActive }: NavLinkRenderProps) => isActive ? `${styles.activeLink} ${styles.link}` : styles.link
@@ -33,6 +34,7 @@ export const Header: FC = () => {
                 actionTwo={() => {
                     dispatch(setVisible({ name: 'logoutModal' }))
                     dispatch(logout())
+                    dispatch(clearUser())
                 }} 
             />
 
@@ -49,7 +51,7 @@ export const Header: FC = () => {
                         <>
                             <NavLink to="/projects" className={active}>Поиск проектов</NavLink>
                             <NavLink to="/cvs" className={active}>Поиск участников</NavLink>
-                            <img src="/user.png" height="40px" width="40px" />
+                            <img src="/user.png" height="40px" width="40px" onClick={() => navigate('/profile')}/>
                             <button
                                 className={styles.loginButton}
                                 onClick={() => onLogout()}

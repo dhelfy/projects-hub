@@ -6,6 +6,7 @@ import { CVPage } from "../pages/CVPage/CVPage"
 import { VacanciesPage } from "../pages/VacanciesPage/VacanciesPage"
 import { ProjectsPage } from "../pages/ProjectsPage/ProjectsPage"
 import { ProjectPage } from "../pages/ProjectPage/ProjectPage"
+import { ProfilePage } from "../pages/ProfilePage/ProfilePage"
 
 export const App: FC = () => {
   return (
@@ -16,6 +17,7 @@ export const App: FC = () => {
             <Route path="/projects" element={<ProjectsPage />}/>
             <Route path="/cvs/:id" element={<CVPage />}/>
             <Route path="/projects/:id" element={<ProjectPage />}/>
+            <Route path="/profile" element={<ProfilePage />}/>
         </Route>
     </Routes>
   )

@@ -15,6 +15,19 @@ export interface IStudentCard {
     socials: ILink[];
 }
 
+export interface IUser {
+    login: string,
+    password: string,
+    name: string,
+    lastname: string,
+    speciality: string,
+    course: string,
+    telegram: string,
+    id: number,
+    cv: number[],
+    projects: number[]
+}
+
 export interface IProjectCard {
     userId: number;
     id: number;

@@ -7,6 +7,7 @@ import modalReducer from "./slices/modalSlice"
 import cardPageReducer from "./slices/cardPageSlice"
 import projectsReducer from "./slices/projectsSlice"
 import projectPageReducer from "./slices/projectPageSlice"
+import userReducer from "./slices/userSlice"
 import rootSaga from "../sagas/rootSaga";
 
 const saga = createSagaMiddleware()
@@ -19,7 +20,8 @@ const store = configureStore({
         modalReducer,
         cardPageReducer,
         projectsReducer,
-        projectPageReducer
+        projectPageReducer,
+        userReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(saga),
 })

@@ -1,0 +1,21 @@
+.cvsAndProjectsSection, .requestsAndIvitationsSection {
+    display: flex;
+    gap: 100px;
+}
+
+.userInfoItem {
+    display: flex;
+    gap: 10px;
+}
+
+.saveButton, .changeButton {
+    cursor: pointer;
+}
+
+.changeButton {
+    color: #6F02CE;
+}
+
+.userInfoItemValue {
+    color: #767676;
+}

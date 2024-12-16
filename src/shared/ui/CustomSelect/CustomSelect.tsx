@@ -6,7 +6,7 @@ interface CustomSelectProps {
     options: IOptions[];
     name: string;
     hint: string;
-    onSelect: (value: string, name: string) => void
+    onSelect: (value: string, name: string) => void;
 }
 
 export const CustomSelect: FC<CustomSelectProps> = ({options, name, hint, onSelect}) => {
