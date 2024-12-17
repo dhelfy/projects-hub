@@ -26,10 +26,13 @@ const projectsSlice = createSlice({
             state.isLoading = true
         },
         fetchAllProjectsSuccess: (state, action: PayloadAction<IProjectCard[]>) => {
-            state.projects = action.payload
-            state.filteredProjects = action.payload
-            state.isLoading = false
-        },
+            const existingIds = new Set(state.projects.map((project) => project.id));
+            const newProjects = action.payload.filter((project) => !existingIds.has(project.id));
+        
+            state.projects = [...state.projects, ...newProjects];
+            state.filteredProjects = [...state.projects];
+            state.isLoading = false;
+        },        
         fetchAllProjectsFailure: (state) => {
             state.isLoading = false
         },
@@ -60,6 +63,11 @@ const projectsSlice = createSlice({
                 });
             });
         },
+        addProject: (state, action: PayloadAction<IProjectCard>) => {
+            state.projects.push(action.payload)
+            state.filteredProjects.push(action.payload)
+        },
+        
 
     }
 })
@@ -70,4 +78,5 @@ export const {
     fetchAllProjectsSuccess,
     fetchAllProjectsFailure,
     setFilter,
+    addProject
 } = projectsSlice.actions

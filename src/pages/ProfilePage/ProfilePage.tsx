@@ -9,10 +9,12 @@ import { Card } from "../../shared/ui/Card/Card"
 import { selectAllProjects } from "../../state/selectors/projectsSelector"
 import { IProjectCard } from "../../types/types"
 import { fetchAllProjects } from "../../state/slices/projectsSlice"
+import { useNavigate } from "react-router-dom"
 
 export const ProfilePage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     let username = useSelector(selectUsername)
     let user = useSelector(selectUser)
     let cvs = useSelector(selectUserCvs)
@@ -112,7 +114,7 @@ export const ProfilePage: FC = () => {
                             <div>
                                 <div className={styles.flexbox}>
                                     <h1>Мои резюме</h1>
-                                    <p className={styles.addButton}>+</p>
+                                    <p className={styles.addButton} onClick={() => navigate('/newCV')}>+</p>
                                 </div>
                                 {cvs?.map((cv) => {
                                     return (
@@ -126,7 +128,7 @@ export const ProfilePage: FC = () => {
                             <div>
                                 <div className={styles.flexbox}>
                                     <h1>Мои проекты</h1>
-                                    <p className={styles.addButton}>+</p>
+                                    <p className={styles.addButton} onClick={() => navigate('/newProject')}>+</p>
                                 </div>
                                 {userProjects?.map((project) => {
                                     return (

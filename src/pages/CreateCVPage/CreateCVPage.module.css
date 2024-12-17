@@ -1,0 +1,49 @@
+.cvForm {
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+}
+
+.cvItem {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    max-width: fit-content;
+}
+
+.textareaForm {
+    min-height: 200px;
+    min-width: 600px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.linkContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.link {
+    display: flex;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.link a{
+    text-decoration: none;
+    color: #262626;
+}
+
+.link p{
+    cursor: pointer;
+}
+ 
+
+.select {
+    outline: none;
+    border: none;
+    background-color: #E9E9E9;
+    color: #767676;
+    font-size: 32px;
+    font-weight: 300;
+    border-radius: 5px;
+    padding: 5px;
+}

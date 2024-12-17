@@ -1,0 +1,43 @@
+.projectForm {
+    display: flex;
+    gap: 25px;
+    flex-direction: column;
+}
+
+.projectItem {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    max-width: fit-content;
+}
+
+.textareaForm {
+    min-height: 200px;
+    min-width: 600px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.contactContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.contact {
+    display: flex;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.contact p{
+    cursor: pointer;
+}
+
+.select {
+    outline: none;
+    border: none;
+    background-color: #E9E9E9;
+    color: #767676;
+    font-size: 32px;
+    font-weight: 300;
+    border-radius: 5px;
+    padding: 5px;
+}
