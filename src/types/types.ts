@@ -9,10 +9,11 @@ export interface IInvitation {
     additionalInfo: string;
 }
 
-export interface IProjectRequests {
+export interface IProjectRequest {
     from: string;
     cvId: number;
     additionalInfo: string;
+    projectId: number;
 }
 
 export interface IStudentCard {
@@ -40,7 +41,7 @@ export interface IUser {
     cv: number[];
     projects: number[];
     invitations: IInvitation[];
-    projectRequests: IProjectRequests[];
+    projectRequests: IProjectRequest[];
 }
 
 export interface IProjectCard {

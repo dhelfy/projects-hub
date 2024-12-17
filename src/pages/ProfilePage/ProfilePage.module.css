@@ -19,3 +19,15 @@
 .userInfoItemValue {
     color: #767676;
 }
+
+.flexbox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.addButton {
+    cursor: pointer;
+    border: 1px #262626 solid;
+    padding: 0px 10px;
+}

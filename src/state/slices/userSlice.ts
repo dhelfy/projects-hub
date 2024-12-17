@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IProjectCard, IStudentCard, IUser } from "../../types/types";
+import { IInvitation, IProjectCard, IProjectRequest, IStudentCard, IUser } from "../../types/types";
 
 interface IUserState {
     user: null | IUser;
     cvs: null | IStudentCard[];
-    projects: null | IProjectCard[];
+    projects: IProjectCard[];
+    invitations: null | IInvitation[];
+    requests: null | IProjectRequest[];
     isLoading: boolean;
 }
 
 const initialState: IUserState = {
     user: null,
     cvs: null,
-    projects: null,
+    invitations: null,
+    requests: null,
+    projects: [],
     isLoading: false,
 }
 
@@ -62,6 +66,26 @@ const userSlice = createSlice({
         fetchProjectsFailure: (state) => {
             state.isLoading = false
         },
+        fetchInvitations: (state, action: PayloadAction<{ login: string;}>) => {
+            state.isLoading = true
+        },
+        fetchInvitationsSuccess: (state, action: PayloadAction<IInvitation[]>) => {
+            state.isLoading = false
+            state.invitations = action.payload
+        },
+        fetchInvitationsFailure: (state) => {
+            state.isLoading = false
+        },
+        fetchRequests: (state, action: PayloadAction<{ login: string;}>) => {
+            state.isLoading = true
+        },
+        fetchRequestsSuccess: (state, action: PayloadAction<IProjectRequest[]>) => {
+            state.isLoading = false
+            state.requests = action.payload
+        },
+        fetchRequestsFailure: (state) => {
+            state.isLoading = false
+        },
     }
 })
 
@@ -72,4 +96,6 @@ export const {
     updateTelegram, updateTelegramSuccess, updateTelegramFailure,
     fetchCvs, fetchCvsFailure, fetchCvsSuccess,
     fetchProjects, fetchProjectsFailure, fetchProjectsSuccess,
+    fetchInvitations, fetchInvitationsFailure, fetchInvitationsSuccess,
+    fetchRequests, fetchRequestsFailure, fetchRequestsSuccess
 } = userSlice.actions

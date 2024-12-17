@@ -22,15 +22,15 @@ const projectsSlice = createSlice({
     name: "projects",
     initialState,
     reducers: {
-        fetchProjects: (state) => {
+        fetchAllProjects: (state) => {
             state.isLoading = true
         },
-        fetchProjectsSuccess: (state, action: PayloadAction<IProjectCard[]>) => {
+        fetchAllProjectsSuccess: (state, action: PayloadAction<IProjectCard[]>) => {
             state.projects = action.payload
             state.filteredProjects = action.payload
             state.isLoading = false
         },
-        fetchProjectsFailure: (state) => {
+        fetchAllProjectsFailure: (state) => {
             state.isLoading = false
         },
         setFilter: (state, action: PayloadAction<{ name: string; value: string }>) => {
@@ -66,8 +66,8 @@ const projectsSlice = createSlice({
 
 export default projectsSlice.reducer
 export const {
-    fetchProjects,
-    fetchProjectsSuccess,
-    fetchProjectsFailure,
+    fetchAllProjects,
+    fetchAllProjectsSuccess,
+    fetchAllProjectsFailure,
     setFilter,
 } = projectsSlice.actions

@@ -2,7 +2,7 @@ import { FC, useEffect } from "react"
 import { IProjectCard } from "../../../../types/types"
 import { selectAllProjects } from "../../../../state/selectors/projectsSelector"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchProjects } from "../../../../state/slices/projectsSlice"
+import { fetchAllProjects } from "../../../../state/slices/projectsSlice"
 import { Card } from "../../../../shared/ui/Card/Card"
 import styles from "./ProjectsList.module.css"
 
@@ -13,7 +13,7 @@ export const ProjectsList: FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchProjects())
+        dispatch(fetchAllProjects())
     }, [dispatch])
 
     return (

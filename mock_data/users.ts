@@ -19,7 +19,14 @@ export let users: IUser[] = [
                 additionalInfo: ''
             }
         ],
-        projectRequests: []
+        projectRequests: [
+            {
+                from: 'Александр Котов',
+                cvId: 4,
+                projectId: 1,
+                additionalInfo: ''
+            }
+        ]
     },
     {
         login: 'lobanov.m',
