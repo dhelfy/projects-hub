@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IStudentCard, IUser } from "../../types/types";
+import { IProjectCard, IStudentCard, IUser } from "../../types/types";
 
 interface IUserState {
     user: null | IUser;
     cvs: null | IStudentCard[];
+    projects: null | IProjectCard[];
     isLoading: boolean;
 }
 
 const initialState: IUserState = {
     user: null,
     cvs: null,
+    projects: null,
     isLoading: false,
 }
 
@@ -50,19 +52,24 @@ const userSlice = createSlice({
         fetchCvsFailure: (state) => {
             state.isLoading = false
         },
+        fetchProjects: (state, action: PayloadAction<{ login: string;}>) => {
+            state.isLoading = true
+        },
+        fetchProjectsSuccess: (state, action: PayloadAction<IProjectCard[]>) => {
+            state.isLoading = false
+            state.projects = action.payload
+        },
+        fetchProjectsFailure: (state) => {
+            state.isLoading = false
+        },
     }
 })
 
 export default userSlice.reducer
 export const {
-    fetchUser, 
-    fetchUserSuccess, 
-    fetchUserFailure, 
+    fetchUser, fetchUserSuccess, fetchUserFailure, 
     clearUser,
-    updateTelegram,
-    updateTelegramSuccess,
-    updateTelegramFailure,
-    fetchCvs,
-    fetchCvsFailure,
-    fetchCvsSuccess
+    updateTelegram, updateTelegramSuccess, updateTelegramFailure,
+    fetchCvs, fetchCvsFailure, fetchCvsSuccess,
+    fetchProjects, fetchProjectsFailure, fetchProjectsSuccess,
 } = userSlice.actions

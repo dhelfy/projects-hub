@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react"
 import styles from "./ProfilePage.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { selectIsAuth, selectUsername } from "../../state/selectors/authSelector"
-import { fetchCvs, fetchUser, updateTelegram } from "../../state/slices/userSlice"
-import { selectUser, selectUserCvs } from "../../state/selectors/userSelector"
+import { fetchCvs, fetchProjects, fetchUser, updateTelegram } from "../../state/slices/userSlice"
+import { selectUser, selectUserCvs, selectUserProjects } from "../../state/selectors/userSelector"
 import { CustomInput } from "../../shared/ui/CustomInput/CustomInput"
 import { Card } from "../../shared/ui/Card/Card"
 
@@ -13,6 +13,7 @@ export const ProfilePage: FC = () => {
     let username = useSelector(selectUsername)
     let user = useSelector(selectUser)
     let cvs = useSelector(selectUserCvs)
+    let projects = useSelector(selectUserProjects)
     let [telegram, setTelegram] = useState('')
     let [isDisabled, setIsDisabled] = useState(true)
 
@@ -20,6 +21,7 @@ export const ProfilePage: FC = () => {
         if (username) {
             dispatch(fetchUser({ username: username }))
             dispatch(fetchCvs({ login: username }))
+            dispatch(fetchProjects({ login: username }))
         }
     }, [dispatch, username]);
 
@@ -97,8 +99,8 @@ export const ProfilePage: FC = () => {
                                 <h1>Мои резюме</h1>
                                 {cvs?.map((cv) => {
                                     return (
-                                        <Card heading={cv.speciality} navigateTo="/smwhr">
-                                            <p>Обновлено </p>
+                                        <Card heading={cv.speciality} navigateTo="/smwhr" key={cv.id}>
+                                            <p>Обновлено {cv.updateDate}</p>
                                         </Card>
                                     )
                                 })}
@@ -106,6 +108,13 @@ export const ProfilePage: FC = () => {
 
                             <div>
                                 <h1>Мои проекты</h1>
+                                {projects?.map((project) => {
+                                    return (
+                                        <Card heading={project.name} navigateTo="/smwhr" key={project.id}>
+                                            <p>Обновлено {project.updateDate}</p>
+                                        </Card>
+                                    )
+                                })}
                             </div>
                         </div>
 

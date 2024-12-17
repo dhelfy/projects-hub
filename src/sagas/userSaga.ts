@@ -1,9 +1,11 @@
-import {call, put, takeEvery} from "typed-redux-saga"
-import { getUserByLogin, getUserCvs, updateUserTelegram } from "../API/userAPI"
-import { fetchCvs, fetchCvsFailure, fetchCvsSuccess, fetchUser, fetchUserFailure, fetchUserSuccess, updateTelegram, updateTelegramFailure, updateTelegramSuccess } from "../state/slices/userSlice"
+import {all, call, put, takeEvery} from "typed-redux-saga"
+import { getUserByLogin, getUserCvs, getUserProjects, updateUserTelegram } from "../API/userAPI"
+import { fetchCvs, fetchCvsFailure, fetchCvsSuccess, fetchProjects, fetchUser, fetchUserFailure, fetchUserSuccess, updateTelegram, updateTelegramFailure, updateTelegramSuccess } from "../state/slices/userSlice"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { takeLatest } from "redux-saga/effects";
+import { fetchProjectsSuccess, fetchProjectsFailure } from "../state/slices/userSlice";
 
-function* workFetchUser(action: PayloadAction<{username: string}>): Generator<unknown, void> {
+function* workFetchUser(action: PayloadAction<{username: string}>) {
     try {
         const username = action.payload.username;
         const response = {data: yield* call(getUserByLogin, username)}
@@ -22,7 +24,7 @@ function* workFetchUser(action: PayloadAction<{username: string}>): Generator<un
     }
 }
 
-function* workUpdateTelegram(action: PayloadAction<{ login: string; newTelegram: string }>): Generator<unknown, void> {
+function* workUpdateTelegram(action: PayloadAction<{ login: string; newTelegram: string }>) {
     try {
         const { login, newTelegram } = action.payload;
 
@@ -35,7 +37,7 @@ function* workUpdateTelegram(action: PayloadAction<{ login: string; newTelegram:
     }
 }
 
-function* workFetchCvs(action: PayloadAction<{ login: string; }>): Generator<unknown, void> {
+function* workFetchCvs(action: PayloadAction<{ login: string; }>) {
     try {
         const { login } = action.payload;
 
@@ -48,10 +50,26 @@ function* workFetchCvs(action: PayloadAction<{ login: string; }>): Generator<unk
     }
 }
 
+function* workFetchProjects(action: PayloadAction<{ login: string; }>) {
+    try {
+        const { login } = action.payload;
+
+        const projects = yield* call(getUserProjects, login);
+
+        yield put(fetchProjectsSuccess(projects));
+    } catch (error) {
+        console.error(error);
+        yield put(fetchProjectsFailure());
+    }
+}
+
 function* userSaga () {
-    yield takeEvery(fetchUser, workFetchUser)
-    yield takeEvery(updateTelegram, workUpdateTelegram)
-    yield takeEvery(fetchCvs, workFetchCvs)
+    yield all([
+        takeEvery(fetchUser, workFetchUser),
+        takeEvery(updateTelegram, workUpdateTelegram),
+        takeLatest(fetchCvs, workFetchCvs),
+        takeLatest(fetchProjects ,workFetchProjects)
+    ])
 }
 
 export default userSaga

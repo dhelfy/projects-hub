@@ -14,7 +14,8 @@ export let projects: IProjectCard[] = [
             "Backend",
             "Designer",
             "Project Manager"
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 2,
@@ -28,7 +29,8 @@ export let projects: IProjectCard[] = [
         needs: [
             "Designer",
             "Backend"
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 3,
@@ -42,7 +44,8 @@ export let projects: IProjectCard[] = [
         needs: [
             "Frontend",
             "Backend"
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 4,
@@ -56,7 +59,8 @@ export let projects: IProjectCard[] = [
         needs: [
             "Frontend",
             "Designer"
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 5,
@@ -70,7 +74,8 @@ export let projects: IProjectCard[] = [
         needs: [
             "Frontend",
             "Backend"
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 6,
@@ -84,6 +89,7 @@ export let projects: IProjectCard[] = [
         needs: [
             "Frontend",
             "Designer"
-        ]
+        ],
+        updateDate: '15.12.2024'
     }
 ]

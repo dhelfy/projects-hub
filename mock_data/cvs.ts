@@ -13,7 +13,8 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://github.com/andrew21", name: "Github" },
             { link: "https://linkedin.com/in/andrew21", name: "LinkedIn" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 2,
@@ -27,7 +28,8 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://github.com/maxlobanov", name: "Github" },
             { link: "https://dribbble.com/maxlobanov", name: "Dribbble" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 3,
@@ -41,7 +43,8 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://behance.net/maria_rybnova", name: "Behance" },
             { link: "https://dribbble.com/maria_rybnova", name: "Dribbble" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 4,
@@ -55,7 +58,8 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://github.com/kotovfront", name: "Github" },
             { link: "https://linkedin.com/in/kotovfront", name: "LinkedIn" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 5,
@@ -69,7 +73,8 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://behance.net/ksenia_shushaeva", name: "Behance" },
             { link: "https://dribbble.com/ksenia_shushaeva", name: "Dribbble" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
     {
         userId: 6,
@@ -83,6 +88,7 @@ export let cvs: IStudentCard[] = [
         socials: [
             { link: "https://github.com/ivanchenkoitsme", name: "Github" },
             { link: "https://linkedin.com/in/ivanchenkoitsme", name: "LinkedIn" }
-        ]
+        ],
+        updateDate: '15.12.2024'
     },
 ];

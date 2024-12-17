@@ -3,6 +3,18 @@ export interface ILink {
     name: string;
 }
 
+export interface IInvitation {
+    from: string;
+    projectId: number;
+    additionalInfo: string;
+}
+
+export interface IProjectRequests {
+    from: string;
+    cvId: number;
+    additionalInfo: string;
+}
+
 export interface IStudentCard {
     id: number;
     userId: number,
@@ -13,19 +25,22 @@ export interface IStudentCard {
     skills: string;
     additionalInfo: string;
     socials: ILink[];
+    updateDate: string;
 }
 
 export interface IUser {
-    login: string,
-    password: string,
-    name: string,
-    lastname: string,
-    speciality: string,
-    course: string,
-    telegram: string,
-    id: number,
-    cv: number[],
-    projects: number[]
+    login: string;
+    password: string;
+    name: string;
+    lastname: string;
+    speciality: string;
+    course: string;
+    telegram: string;
+    id: number;
+    cv: number[];
+    projects: number[];
+    invitations: IInvitation[];
+    projectRequests: IProjectRequests[];
 }
 
 export interface IProjectCard {
@@ -36,6 +51,7 @@ export interface IProjectCard {
     description: string;
     contacts: string[];
     needs: string[];
+    updateDate: string;
 }
 
 export interface IOptions {
