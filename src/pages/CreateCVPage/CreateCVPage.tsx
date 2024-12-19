@@ -7,29 +7,34 @@ import { CustomInput } from "../../shared/ui/CustomInput/CustomInput";
 import { CustomButton } from "../../shared/ui/CustomButton/CustomButton";
 import { ILink } from "../../types/types";
 import styles from "./CreateCVPage.module.css"
+import { useNavigate } from "react-router-dom";
+import { addCard } from "../../state/slices/cardSlice";
 
 export const CreateCVPage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
     let username = useSelector(selectUsername)
     let user = useSelector(selectUser)
+    const navigate = useNavigate()
     let [links, setLinks] = useState<ILink[]>([])
     let [newLink, setNewLink] = useState('')
-    let [telegram, setTelegram] = useState('')
+    let [selectedSpeciality, setSelectedSpeciality] = useState('Frontend')
+    let [additionalInfo, setAdditionalInfo] = useState('')
+    let [skills, setSkills] = useState('')
 
     useEffect(() => {
-        dispatch(fetchUser({username: username}))
+        dispatch(fetchUser({ username: username }))
     }, [dispatch, username])
 
     const addNewLink = (newLink: string) => {
         if (newLink.includes('github')) {
-            setLinks([...links, {name: 'GitHub', link: newLink}])
+            setLinks([...links, { name: 'GitHub', link: newLink }])
         } else if (newLink.includes('linktr.ee')) {
-            setLinks([...links, {name: 'Linktree', link: newLink}])
+            setLinks([...links, { name: 'Linktree', link: newLink }])
         } else if (newLink.includes('behance')) {
-            setLinks([...links, {name: 'Behance', link: newLink}])
+            setLinks([...links, { name: 'Behance', link: newLink }])
         } else if (newLink.includes('linkedin')) {
-            setLinks([...links, {name: 'Linkedin', link: newLink}])
+            setLinks([...links, { name: 'Linkedin', link: newLink }])
         } else {
             alert('Сайта нет в списке доступных')
         }
@@ -55,7 +60,13 @@ export const CreateCVPage: FC = () => {
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Специальность</h1>
-                            <select name="" id="" className={styles.select}>
+                            <select 
+                                name="" 
+                                id="" 
+                                className={styles.select}
+                                value={selectedSpeciality}
+                                onChange={(e) => setSelectedSpeciality(e.target.value)}
+                            >
                                 <option>Frontend</option>
                                 <option>Backend</option>
                                 <option>Design</option>
@@ -64,34 +75,33 @@ export const CreateCVPage: FC = () => {
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Телеграм</h1>
-                            <CustomInput 
-                                type="text"
-                                placeholder="@username"
-                                value={telegram}
-                                onChange={(e) => setTelegram(e.currentTarget.value)}
-                            />
+                            <p>{user?.telegram}</p>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Навыки</h1>
-                            <textarea 
-                                className={styles.textareaForm} 
+                            <textarea
+                                className={styles.textareaForm}
                                 placeholder="Расскажите о своих навыках"
+                                value={skills}
+                                onChange={(e) => setSkills(e.currentTarget.value)}
                             >
 
                             </textarea>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Дополнительная информация</h1>
-                            <textarea 
-                                className={styles.textareaForm} 
+                            <textarea
+                                className={styles.textareaForm}
                                 placeholder="Расскажите о том, что считаете важным"
+                                value={additionalInfo}
+                                onChange={(e) => setAdditionalInfo(e.currentTarget.value)}
                             >
 
                             </textarea>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Ссылки на соцсети</h1>
-                            <CustomInput 
+                            <CustomInput
                                 type="text"
                                 placeholder="Вставьте ссылку"
                                 value={newLink}
@@ -113,10 +123,31 @@ export const CreateCVPage: FC = () => {
                                 })}
                             </div>
                         </div>
+
+                        <CustomButton color="dark" onClick={() => {
+                            if (user) {
+                                dispatch(addCard({
+                                    id: Date.now(),
+                                    userId: user.id,
+                                    heading: `${user.name + ' ' + user.lastname}`,
+                                    speciality: selectedSpeciality,
+                                    course: user.course,
+                                    telegram: user.telegram,
+                                    skills: skills,
+                                    additionalInfo: additionalInfo,
+                                    socials: links,
+                                    updateDate: new Date().toISOString().split('T')[0],
+                                }))
+                                
+                                navigate('/profile')
+                            }
+                        }}>
+                            Создать
+                        </CustomButton>
                     </div>
                     :
                     <h1>Anauthorized</h1>
-        }
+            }
         </>
     )
 }

@@ -1,9 +1,17 @@
-.cvsAndProjectsSection, .requestsAndIvitationsSection {
-    display: flex;
+.grid {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: minmax(100px, 500px) minmax(100px, 500px);
     gap: 100px;
 }
 
-.userInfoItem {
+.projects, .cvs, .invitations, .requests {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.userInfoItem, .telegram {
     display: flex;
     gap: 10px;
 }
@@ -36,4 +44,14 @@
 .addButton:hover {
     background-color: #e9e9e9;
     transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        display: block;
+    }
+
+    .telegram {
+        flex-direction: column;
+    }
 }

@@ -4,6 +4,7 @@ import cardPageSaga from "./cardPageSaga";
 import projectsSaga from "./projectsSaga";
 import projectPageSaga from "./projectPageSaga"
 import userSaga from "./userSaga";
+import authSaga from "./authSaga"
 
 // корневая сага
 export default function* rootSaga() {
@@ -12,6 +13,7 @@ export default function* rootSaga() {
         cardPageSaga(),
         projectsSaga(),
         projectPageSaga(),
-        userSaga()
+        userSaga(),
+        authSaga()
     ])
 }

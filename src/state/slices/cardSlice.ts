@@ -26,8 +26,11 @@ const cardSlice = createSlice({
             state.isLoading = true
         },
         fetchCardsSuccess: (state, action: PayloadAction<IStudentCard[]>) => {
-            state.cards = action.payload
-            state.filteredCards = action.payload
+            const existingIds = new Set(state.cards.map((cv) => cv.id))
+            const newCards = action.payload.filter((cv) => !existingIds.has(cv.id))
+
+            state.cards = [...state.cards, ...newCards]
+            state.filteredCards = [...state.cards]
             state.isLoading = false
         },
         fetchCardsFailure: (state) => {
@@ -51,7 +54,11 @@ const cardSlice = createSlice({
                     return card[filterName as keyof IStudentCard] === filterValue
                 });
             });
-        }
+        },
+        addCard: (state, action: PayloadAction<IStudentCard>) => {
+            state.cards.push(action.payload)
+            state.filteredCards.push(action.payload)
+        },
     }
 })
 
@@ -61,4 +68,5 @@ export const {
     fetchCardsSuccess, 
     fetchCardsFailure, 
     setFilter,
+    addCard
 } = cardSlice.actions

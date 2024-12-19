@@ -10,6 +10,8 @@ import { selectAllProjects } from "../../state/selectors/projectsSelector"
 import { IProjectCard } from "../../types/types"
 import { fetchAllProjects } from "../../state/slices/projectsSlice"
 import { useNavigate } from "react-router-dom"
+import { selectAllCards } from "../../state/selectors/cardSelector"
+import { fetchCards } from "../../state/slices/cardSlice"
 
 export const ProfilePage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
@@ -17,9 +19,15 @@ export const ProfilePage: FC = () => {
     const navigate = useNavigate()
     let username = useSelector(selectUsername)
     let user = useSelector(selectUser)
-    let cvs = useSelector(selectUserCvs)
-    let userProjects = useSelector(selectUserProjects)
+    // let cvs = useSelector(selectUserCvs)
+    let allCvs = useSelector(selectAllCards)
+    let userCvs = allCvs.filter((cv) => {
+        return cv.userId === user?.id
+    })
     let allProjects = useSelector(selectAllProjects)
+    let userProjects = allProjects.filter((project) => {
+        return project.userId === user?.id
+    })
     let invitations = useSelector(selectUserInvitations)
     let projectRequests = useSelector(selectUserRequests)
     let [telegram, setTelegram] = useState('')
@@ -33,6 +41,7 @@ export const ProfilePage: FC = () => {
             dispatch(fetchInvitations({ login: username }))
             dispatch(fetchRequests({ login: username }))
             dispatch(fetchAllProjects())
+            dispatch(fetchCards())
         }
     }, [dispatch, username]);
 
@@ -41,8 +50,8 @@ export const ProfilePage: FC = () => {
             setTelegram(user.telegram);
         }
     }, [user]);
-    
-    function onInputChange (e: React.ChangeEvent<HTMLInputElement>) {
+
+    function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         setTelegram(e.currentTarget.value)
     }
 
@@ -66,30 +75,30 @@ export const ProfilePage: FC = () => {
                     <div>
                         <div className={styles.userInfo}>
                             <h1>Настройки</h1>
-                            <div className={styles.userInfoItem}>
+                            <div className={styles.telegram}>
                                 <p>Телеграм</p>
-                                <CustomInput 
-                                    type="text" 
+                                <CustomInput
+                                    type="text"
                                     value={telegram}
                                     onChange={onInputChange}
                                     disabled={isDisabled}
                                 />
                                 {
-                                    !isDisabled 
-                                    ? 
-                                    <p 
-                                        className={styles.saveButton}
-                                        onClick={() => onSave()}
-                                    >
-                                        Сохранить
-                                    </p> 
-                                    :                                 
-                                    <p 
-                                        className={styles.changeButton}
-                                        onClick={() => setIsDisabled(!isDisabled)}
-                                    >
-                                        Изменить
-                                    </p>  
+                                    !isDisabled
+                                        ?
+                                        <p
+                                            className={styles.saveButton}
+                                            onClick={() => onSave()}
+                                        >
+                                            Сохранить
+                                        </p>
+                                        :
+                                        <p
+                                            className={styles.changeButton}
+                                            onClick={() => setIsDisabled(!isDisabled)}
+                                        >
+                                            Изменить
+                                        </p>
                                 }
                             </div>
                             <div className={styles.userInfoItem}>
@@ -110,38 +119,37 @@ export const ProfilePage: FC = () => {
                             </div>
                         </div>
 
-                        <div className={styles.cvsAndProjectsSection}>
-                            <div>
+                        <div className={styles.grid}>
+
+                            <div className={styles.cvs}>
                                 <div className={styles.flexbox}>
                                     <h1>Мои резюме</h1>
                                     <p className={styles.addButton} onClick={() => navigate('/newCV')}>+</p>
                                 </div>
-                                {cvs?.map((cv) => {
+                                {userCvs?.map((cv) => {
                                     return (
-                                        <Card heading={cv.speciality} navigateTo="/smwhr" key={cv.id}>
+                                        <Card heading={cv.speciality} navigateTo={`/cvs/${cv.id}`} key={cv.id}>
                                             <p>Обновлено {cv.updateDate}</p>
                                         </Card>
                                     )
                                 })}
                             </div>
 
-                            <div>
+                            <div className={styles.projects}>
                                 <div className={styles.flexbox}>
                                     <h1>Мои проекты</h1>
                                     <p className={styles.addButton} onClick={() => navigate('/newProject')}>+</p>
                                 </div>
-                                {userProjects?.map((project) => {
+                                {userProjects.map((project) => {
                                     return (
-                                        <Card heading={project.name} navigateTo="/smwhr" key={project.id}>
+                                        <Card heading={project.name} navigateTo={`/projects/${project.id}`} key={project.id}>
                                             <p>Обновлено {project.updateDate}</p>
                                         </Card>
                                     )
                                 })}
                             </div>
-                        </div>
 
-                        <div className={styles.requestsAndIvitationsSection}>
-                            <div>
+                            <div className={styles.requests}>
                                 <h1>Заявки</h1>
                                 {projectRequests?.map((request) => {
                                     return (
@@ -152,7 +160,7 @@ export const ProfilePage: FC = () => {
                                 })}
                             </div>
 
-                            <div>
+                            <div className={styles.invitations}>
                                 <h1>Приглашения</h1>
                                 {invitations?.map((invite) => {
                                     return (
@@ -163,6 +171,7 @@ export const ProfilePage: FC = () => {
                                 })}
                             </div>
                         </div>
+
                     </div>
                     :
                     <h1>Anauthorized</h1>

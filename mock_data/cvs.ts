@@ -14,7 +14,7 @@ export let cvs: IStudentCard[] = [
             { link: "https://github.com/andrew21", name: "Github" },
             { link: "https://linkedin.com/in/andrew21", name: "LinkedIn" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
     {
         userId: 2,
@@ -29,7 +29,7 @@ export let cvs: IStudentCard[] = [
             { link: "https://github.com/maxlobanov", name: "Github" },
             { link: "https://dribbble.com/maxlobanov", name: "Dribbble" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
     {
         userId: 3,
@@ -44,7 +44,7 @@ export let cvs: IStudentCard[] = [
             { link: "https://behance.net/maria_rybnova", name: "Behance" },
             { link: "https://dribbble.com/maria_rybnova", name: "Dribbble" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
     {
         userId: 4,
@@ -59,7 +59,7 @@ export let cvs: IStudentCard[] = [
             { link: "https://github.com/kotovfront", name: "Github" },
             { link: "https://linkedin.com/in/kotovfront", name: "LinkedIn" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
     {
         userId: 5,
@@ -74,21 +74,21 @@ export let cvs: IStudentCard[] = [
             { link: "https://behance.net/ksenia_shushaeva", name: "Behance" },
             { link: "https://dribbble.com/ksenia_shushaeva", name: "Dribbble" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
     {
         userId: 6,
         id: 6,
-        heading: "Иван Иванченко",
+        heading: "Иван Быков",
         speciality: "Backend",
         course: "3-ий курс",
-        telegram: "@ivanchenkoitsme",
+        telegram: "@shararamo4ka",
         skills: "Python, Django, PostgreSQL, REST API, Kubernetes",
         additionalInfo: "Занимаюсь проектированием API и масштабируемых систем. Люблю разбираться в новых технологиях.",
         socials: [
-            { link: "https://github.com/ivanchenkoitsme", name: "Github" },
-            { link: "https://linkedin.com/in/ivanchenkoitsme", name: "LinkedIn" }
+            { link: "https://github.com/shararamo4ka", name: "Github" },
+            { link: "https://linkedin.com/in/shararamo4ka", name: "LinkedIn" }
         ],
-        updateDate: '15.12.2024'
+        updateDate: '2024-12-15'
     },
 ];

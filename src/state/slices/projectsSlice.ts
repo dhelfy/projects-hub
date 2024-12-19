@@ -66,9 +66,8 @@ const projectsSlice = createSlice({
         addProject: (state, action: PayloadAction<IProjectCard>) => {
             state.projects.push(action.payload)
             state.filteredProjects.push(action.payload)
+            
         },
-        
-
     }
 })
 

@@ -85,13 +85,13 @@ export let users: IUser[] = [
         projectRequests: []
     },
     {
-        login: 'ivanchenko.i',
-        password: 'backend_99',
+        login: 'shararamo4ka',
+        password: 'shararamo4ka_99',
         name: "Иван",
-        lastname: "Иванченко",
+        lastname: "Быков",
         speciality: "Backend",
         course: "3-ий курс",
-        telegram: "@ivanchenkoitsme",
+        telegram: "@shararamo4ka",
         id: 6,
         cv: [6],
         projects: [6],

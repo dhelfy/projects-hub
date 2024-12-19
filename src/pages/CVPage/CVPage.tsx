@@ -49,7 +49,7 @@ export const CVPage: FC = () => {
                     <h1>Ссылки на соцсети</h1>
                     <div className={styles.links}>
                         {card?.socials.map((link) => {
-                            return <a href={link.link}>{link.name}</a>
+                            return <a href={link.link} target="_blank">{link.name}</a>
                         })}
                     </div>
                 </div>
@@ -69,7 +69,7 @@ export const CVPage: FC = () => {
                                 color="dark"
                                 onClick={() => navigate(-1)}
                             >
-                                Назад к резюме
+                                Назад
                             </CustomButton>
                         </>
                         :
@@ -77,7 +77,7 @@ export const CVPage: FC = () => {
                             color="dark"
                             onClick={() => navigate(-1)}
                         >
-                            Назад к резюме
+                            Назад
                         </CustomButton>
                 }
             </div>

@@ -47,3 +47,17 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+@media (max-width: 768px) {
+    .textareaForm {
+        min-height: 100px;
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 500px) {
+    .textareaForm {
+        min-width: 200px;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+}

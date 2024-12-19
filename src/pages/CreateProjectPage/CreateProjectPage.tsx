@@ -7,12 +7,14 @@ import { CustomInput } from "../../shared/ui/CustomInput/CustomInput";
 import { CustomButton } from "../../shared/ui/CustomButton/CustomButton";
 import styles from "./CreateProjectPage.module.css"
 import { addProject } from "../../state/slices/projectsSlice";
+import { useNavigate } from "react-router-dom";
 
 export const CreateProjectPage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
     let username = useSelector(selectUsername)
     let user = useSelector(selectUser)
+    const navigate = useNavigate()
     let [contacts, setContacts] = useState<string[]>([])
     let [newContact, setNewContact] = useState('')
     let [projectName, setProjectName] = useState('')
@@ -132,6 +134,8 @@ export const CreateProjectPage: FC = () => {
                                         updateDate: new Date().toISOString().split('T')[0],
                                     }
                                 ))
+
+                                navigate('/profile')
                             }
                         }}>
                             Создать

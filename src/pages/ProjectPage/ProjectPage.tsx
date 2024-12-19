@@ -55,7 +55,7 @@ export const ProjectPage: FC = () => {
                                 color="dark"
                                 onClick={() => navigate(-1)}
                             >
-                                Назад к проектам
+                                Назад
                             </CustomButton>
                         </div>
                         :
@@ -64,7 +64,7 @@ export const ProjectPage: FC = () => {
                             color="dark"
                             onClick={() => navigate(-1)}
                         >
-                            Назад к проектам
+                            Назад
                         </CustomButton>
                     </div>
                 }
