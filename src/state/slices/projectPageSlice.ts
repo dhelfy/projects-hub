@@ -15,7 +15,7 @@ const projectPageSlice = createSlice({
     name: "currentProject",
     initialState,
     reducers: {
-        fetchProject: (state, action: PayloadAction<number>) => {
+        fetchProject: (state, action: PayloadAction<string>) => {
             state.isLoading = true;
         },
         fetchProjectSuccess: (state, action: PayloadAction<IProjectCard>) => {

@@ -14,16 +14,17 @@ export const ProjectPage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
 
     type ProjectPageParams = {
-        id: string;
+        name: string;
     }
 
     const params = useParams<ProjectPageParams>()
 
     useEffect(() => {
-        if (params.id) {
-            dispatch(fetchProject(Number(params.id)))
+        if (params.name) {
+            dispatch(fetchProject(params.name))
         }
-    }, [params.id])
+        console.log(params.name)
+    }, [params.name])
 
     return (
         <>

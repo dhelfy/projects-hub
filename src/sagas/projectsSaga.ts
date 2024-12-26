@@ -4,10 +4,21 @@ import { fetchAllProjects, fetchAllProjectsSuccess } from "../state/slices/proje
 
 function* workFetchProjects(): Generator<unknown, void> {
     try {
-        const response = {data: yield* call(getAllProjects)}
+        const response = yield* call(getAllProjects)
 
         const projects = response.data
-        yield put(fetchAllProjectsSuccess(projects))
+
+        const parseFields = (projects: any[]) => {
+            return projects.map((project) => ({
+              ...project,
+              contacts: JSON.parse(project.contacts),
+              needs: JSON.parse(project.needs),
+            }));
+          };
+          
+        const parsedProjects = parseFields(projects);
+          
+        yield put(fetchAllProjectsSuccess(parsedProjects))
     } catch (error) {
         console.log(error)
     }

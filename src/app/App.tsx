@@ -18,7 +18,7 @@ export const App: FC = () => {
             <Route path="/cvs" element={<VacanciesPage />}/>
             <Route path="/projects" element={<ProjectsPage />}/>
             <Route path="/cvs/:id" element={<CVPage />}/>
-            <Route path="/projects/:id" element={<ProjectPage />}/>
+            <Route path="/projects/:name" element={<ProjectPage />}/>
             <Route path="/profile" element={<ProfilePage />}/>
             <Route path="/newCV" element={<CreateCVPage />}/>
             <Route path="/newProject" element={<CreateProjectPage />}/>

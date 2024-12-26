@@ -18,15 +18,20 @@ export interface IProjectRequest {
 
 export interface IStudentCard {
     id: number;
-    userId: number,
-    heading: string;
-    speciality: string;
-    course: string;
-    telegram: string;
-    skills: string;
-    additionalInfo: string;
-    socials: ILink[];
-    updateDate: string;
+    fullName: string;
+    profession: string;
+    tag: string;
+    additionalInfo: string | null;
+    information: string;
+    phoneNumber: string;
+    email: string;
+    course: number;
+    login: string;
+    password: string;
+    skills: string | null;
+    contactInfo: string;
+    experienceYears: number;
+    userId: number;
 }
 
 export interface IUser {
@@ -52,7 +57,6 @@ export interface IProjectCard {
     description: string;
     contacts: string[];
     needs: string[];
-    updateDate: string;
 }
 
 export interface IOptions {

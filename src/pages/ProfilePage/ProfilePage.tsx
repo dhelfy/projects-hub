@@ -2,9 +2,8 @@ import { FC, useEffect, useState } from "react"
 import styles from "./ProfilePage.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { selectIsAuth, selectUsername } from "../../state/selectors/authSelector"
-import { fetchCvs, fetchInvitations, fetchProjects, fetchRequests, fetchUser, updateTelegram } from "../../state/slices/userSlice"
-import { selectUser, selectUserCvs, selectUserInvitations, selectUserProjects, selectUserRequests } from "../../state/selectors/userSelector"
-import { CustomInput } from "../../shared/ui/CustomInput/CustomInput"
+import { fetchCvs, fetchInvitations, fetchProjects, fetchRequests, fetchUser } from "../../state/slices/userSlice"
+import { selectUser, selectUserInvitations, selectUserRequests } from "../../state/selectors/userSelector"
 import { Card } from "../../shared/ui/Card/Card"
 import { selectAllProjects } from "../../state/selectors/projectsSelector"
 import { IProjectCard } from "../../types/types"
@@ -18,20 +17,29 @@ export const ProfilePage: FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     let username = useSelector(selectUsername)
-    let user = useSelector(selectUser)
-    // let cvs = useSelector(selectUserCvs)
+
     let allCvs = useSelector(selectAllCards)
+
     let userCvs = allCvs.filter((cv) => {
-        return cv.userId === user?.id
+        return cv.login === username
     })
+
+    const user = {
+        login: userCvs[0].login,
+        password: userCvs[0].password,
+        fullName: userCvs[0].fullName,
+        speciality: userCvs[0].profession,
+        course: userCvs[0].course,
+        contact: userCvs[0].contactInfo,
+        id: userCvs[0].userId
+    }
+
     let allProjects = useSelector(selectAllProjects)
     let userProjects = allProjects.filter((project) => {
         return project.userId === user?.id
     })
     let invitations = useSelector(selectUserInvitations)
     let projectRequests = useSelector(selectUserRequests)
-    let [telegram, setTelegram] = useState('')
-    let [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(() => {
         if (username) {
@@ -44,23 +52,6 @@ export const ProfilePage: FC = () => {
             dispatch(fetchCards())
         }
     }, [dispatch, username]);
-
-    useEffect(() => {
-        if (user?.telegram) {
-            setTelegram(user.telegram);
-        }
-    }, [user]);
-
-    function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        setTelegram(e.currentTarget.value)
-    }
-
-    function onSave() {
-        if (user?.login) {
-            dispatch(updateTelegram({ login: user.login, newTelegram: telegram }));
-            setIsDisabled(true);
-        }
-    }
 
     function findProjectNameById(projectId: number, projectsArray: IProjectCard[]) {
         const project = projectsArray.find((project) => project.id === projectId)
@@ -75,39 +66,13 @@ export const ProfilePage: FC = () => {
                     <div>
                         <div className={styles.userInfo}>
                             <h1>Настройки</h1>
-                            <div className={styles.telegram}>
-                                <p>Телеграм</p>
-                                <CustomInput
-                                    type="text"
-                                    value={telegram}
-                                    onChange={onInputChange}
-                                    disabled={isDisabled}
-                                />
-                                {
-                                    !isDisabled
-                                        ?
-                                        <p
-                                            className={styles.saveButton}
-                                            onClick={() => onSave()}
-                                        >
-                                            Сохранить
-                                        </p>
-                                        :
-                                        <p
-                                            className={styles.changeButton}
-                                            onClick={() => setIsDisabled(!isDisabled)}
-                                        >
-                                            Изменить
-                                        </p>
-                                }
-                            </div>
                             <div className={styles.userInfoItem}>
                                 <p>Имя</p>
-                                <p className={styles.userInfoItemValue}>{user?.name}</p>
+                                <p className={styles.userInfoItemValue}>{user?.fullName.split(' ')[0]}</p>
                             </div>
                             <div className={styles.userInfoItem}>
                                 <p>Фамилия</p>
-                                <p className={styles.userInfoItemValue}>{user?.lastname}</p>
+                                <p className={styles.userInfoItemValue}>{user?.fullName.split(' ')[1]}</p>
                             </div>
                             <div className={styles.userInfoItem}>
                                 <p>Специальность</p>
@@ -128,8 +93,8 @@ export const ProfilePage: FC = () => {
                                 </div>
                                 {userCvs?.map((cv) => {
                                     return (
-                                        <Card heading={cv.speciality} navigateTo={`/cvs/${cv.id}`} key={cv.id}>
-                                            <p>Обновлено {cv.updateDate}</p>
+                                        <Card heading={cv.profession} navigateTo={`/cvs/${cv.id}`} key={cv.id}>
+                                            <p>{cv.contactInfo}</p>
                                         </Card>
                                     )
                                 })}
@@ -142,14 +107,14 @@ export const ProfilePage: FC = () => {
                                 </div>
                                 {userProjects.map((project) => {
                                     return (
-                                        <Card heading={project.name} navigateTo={`/projects/${project.id}`} key={project.id}>
-                                            <p>Обновлено {project.updateDate}</p>
+                                        <Card heading={project.name} navigateTo={`/projects/${project.name}`} key={project.id}>
+                                            <p>{project.description}</p>
                                         </Card>
                                     )
                                 })}
                             </div>
 
-                            <div className={styles.requests}>
+                            {/* <div className={styles.requests}>
                                 <h1>Заявки</h1>
                                 {projectRequests?.map((request) => {
                                     return (
@@ -169,7 +134,7 @@ export const ProfilePage: FC = () => {
                                         </Card>
                                     )
                                 })}
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>

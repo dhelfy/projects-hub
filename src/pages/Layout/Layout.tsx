@@ -16,8 +16,8 @@ export const Layout: FC = () => {
     const modal = useSelector(selectModalByName('authModal'))
     const error = useSelector(selectError)
     const dispatch = useDispatch()
-    let [loginState, setLoginState] = useState('petrov.a')
-    let [passwordState, setPasswordState] = useState('front_2024')
+    let [loginState, setLoginState] = useState('abubandit')
+    let [passwordState, setPasswordState] = useState('NEsecurepassword')
 
     const onClickAction = () => dispatch(login({ login: loginState, password: passwordState })) 
 

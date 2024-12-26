@@ -21,11 +21,11 @@ export const ProjectsList: FC = () => {
             {projects.map((project) => {
 
                 return (
-                    <Card heading={project.name} navigateTo={`/projects/${project.id}`} key={project.id}>
+                    <Card heading={project.name} navigateTo={`/projects/${project.name}`} key={project.id}>
                         <div className={styles.needs}>
                             Нужны: {project.needs.join(' ')}
                         </div>
-                        <p>{project.course}</p>
+                        <p>Курс: {project.course}</p>
                         <p>Связь: {project.contacts[0]}</p>
                     </Card>
                 )

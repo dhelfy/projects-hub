@@ -30,12 +30,12 @@ export const CVPage: FC = () => {
         <>
             <div className={styles.cvInfo}>
                 <div>
-                    <h1>{card?.heading}</h1>
-                    <p>{card?.telegram}</p>
+                    <h1>{card?.fullName}</h1>
+                    <p>{card?.contactInfo}</p>
                 </div>
                 <div>
                     <h1>Специальность</h1>
-                    <p>{card?.speciality}</p>
+                    <p>{card?.profession}</p>
                 </div>
                 <div>
                     <h1>Навыки</h1>
@@ -44,14 +44,6 @@ export const CVPage: FC = () => {
                 <div>
                     <h1>Дополнительная информация</h1>
                     <p>{card?.additionalInfo}</p>
-                </div>
-                <div>
-                    <h1>Ссылки на соцсети</h1>
-                    <div className={styles.links}>
-                        {card?.socials.map((link) => {
-                            return <a href={link.link} target="_blank">{link.name}</a>
-                        })}
-                    </div>
                 </div>
             </div>
 

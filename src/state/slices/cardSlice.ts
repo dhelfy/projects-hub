@@ -17,6 +17,21 @@ const initialState: CardState = {
     activeFilters: {}
 };
 
+interface INewCV {
+    fullName: string,
+    profession: string,
+    tag: string,
+    information: string,
+    phoneNumber: string,
+    email: string,
+    course: number,
+    login: string,
+    password: string,
+    skills: string,
+    additionalInfo: string,
+    contactInfo: string,
+    experienceYears: number
+}
 
 const cardSlice = createSlice({
     name: "cards",
@@ -55,10 +70,15 @@ const cardSlice = createSlice({
                 });
             });
         },
-        addCard: (state, action: PayloadAction<IStudentCard>) => {
-            state.cards.push(action.payload)
-            state.filteredCards.push(action.payload)
+        addCard: (state, action: PayloadAction<INewCV>) => {
+            state.isLoading = true
         },
+        addCardSuccess: (state) => {
+            state.isLoading = false
+        },
+        addCardFailure: (state) => {
+            state.isLoading = false
+        }
     }
 })
 
@@ -68,5 +88,7 @@ export const {
     fetchCardsSuccess, 
     fetchCardsFailure, 
     setFilter,
-    addCard
+    addCard,
+    addCardFailure,
+    addCardSuccess
 } = cardSlice.actions

@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuth, selectUsername } from "../../state/selectors/authSelector";
-import { selectUser } from "../../state/selectors/userSelector";
 import { fetchUser } from "../../state/slices/userSlice";
 import { CustomInput } from "../../shared/ui/CustomInput/CustomInput";
 import { CustomButton } from "../../shared/ui/CustomButton/CustomButton";
@@ -9,40 +8,40 @@ import { ILink } from "../../types/types";
 import styles from "./CreateCVPage.module.css"
 import { useNavigate } from "react-router-dom";
 import { addCard } from "../../state/slices/cardSlice";
+import { selectAllCards } from "../../state/selectors/cardSelector";
 
 export const CreateCVPage: FC = () => {
     const isAuth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
     let username = useSelector(selectUsername)
-    let user = useSelector(selectUser)
+    let allCvs = useSelector(selectAllCards)
+
+    let userCvs = allCvs.filter((cv) => {
+        return cv.login === username
+    })
+
+    const user = {
+        login: userCvs[0].login,
+        password: userCvs[0].password,
+        fullName: userCvs[0].fullName,
+        speciality: userCvs[0].profession,
+        course: userCvs[0].course,
+        contact: userCvs[0].contactInfo,
+        id: userCvs[0].userId
+    }
+
     const navigate = useNavigate()
-    let [links, setLinks] = useState<ILink[]>([])
-    let [newLink, setNewLink] = useState('')
-    let [selectedSpeciality, setSelectedSpeciality] = useState('Frontend')
+    let [aboutInfo, setAboutInfo] = useState('')
+    let [selectedSpeciality, setSelectedSpeciality] = useState('Frontend Developer')
     let [additionalInfo, setAdditionalInfo] = useState('')
     let [skills, setSkills] = useState('')
+    let [phoneNumber, setPhoneNumber] = useState('')
+    let [experience, setExperience] = useState('')
+    let [tags, setTags] = useState('')
 
     useEffect(() => {
         dispatch(fetchUser({ username: username }))
     }, [dispatch, username])
-
-    const addNewLink = (newLink: string) => {
-        if (newLink.includes('github')) {
-            setLinks([...links, { name: 'GitHub', link: newLink }])
-        } else if (newLink.includes('linktr.ee')) {
-            setLinks([...links, { name: 'Linktree', link: newLink }])
-        } else if (newLink.includes('behance')) {
-            setLinks([...links, { name: 'Behance', link: newLink }])
-        } else if (newLink.includes('linkedin')) {
-            setLinks([...links, { name: 'Linkedin', link: newLink }])
-        } else {
-            alert('Сайта нет в списке доступных')
-        }
-    }
-
-    const removeLink = (name: string) => {
-        setLinks(links.filter((link: ILink) => link.name !== name));
-    }
 
     return (
         <>
@@ -52,11 +51,11 @@ export const CreateCVPage: FC = () => {
                     <div className={styles.cvForm}>
                         <div className={styles.cvItem}>
                             <h1>Имя</h1>
-                            <p>{user?.name}</p>
+                            <p>{user?.fullName.split(' ')[0]}</p>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Фамилия</h1>
-                            <p>{user?.lastname}</p>
+                            <p>{user?.fullName.split(' ')[1]}</p>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Специальность</h1>
@@ -67,15 +66,15 @@ export const CreateCVPage: FC = () => {
                                 value={selectedSpeciality}
                                 onChange={(e) => setSelectedSpeciality(e.target.value)}
                             >
-                                <option>Frontend</option>
-                                <option>Backend</option>
-                                <option>Design</option>
-                                <option>Project Manager</option>
+                                <option>Frontend Developer</option>
+                                <option>Backend Developer</option>
+                                <option>Designer</option>
+                                <option>Product Manager</option>
                             </select>
                         </div>
                         <div className={styles.cvItem}>
-                            <h1>Телеграм</h1>
-                            <p>{user?.telegram}</p>
+                            <h1>Почта</h1>
+                            <p>{user?.contact}</p>
                         </div>
                         <div className={styles.cvItem}>
                             <h1>Навыки</h1>
@@ -100,44 +99,64 @@ export const CreateCVPage: FC = () => {
                             </textarea>
                         </div>
                         <div className={styles.cvItem}>
-                            <h1>Ссылки на соцсети</h1>
+                            <h1>О себе</h1>
+                            <textarea
+                                className={styles.textareaForm}
+                                placeholder="Расскажите о себе"
+                                value={aboutInfo}
+                                onChange={(e) => setAboutInfo(e.currentTarget.value)}
+                            />
+                        </div>
+
+                        <div className={styles.cvItem}>
+                            <h1>Номер телефона</h1>
                             <CustomInput
                                 type="text"
-                                placeholder="Вставьте ссылку"
-                                value={newLink}
-                                onChange={(e) => setNewLink(e.currentTarget.value)}
+                                placeholder="Введите номер телефона"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.currentTarget.value)}
                             />
-                            <CustomButton color="dark" onClick={() => addNewLink(newLink)}>
-                                Добавить
-                            </CustomButton>
-                            <div className={styles.linkContainer}>
-                                {links.map((link) => {
-                                    return (
-                                        <div className={styles.link}>
-                                            <a href={link.link} target="_blank">{link.name}</a>
-                                            <p onClick={() => removeLink(link.name)}>
-                                                ❌
-                                            </p>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                        </div>
+
+                        <div className={styles.cvItem}>
+                            <h1>Опыт</h1>
+                            <CustomInput
+                                type="number"
+                                min="0" 
+                                max="45"
+                                placeholder="В годах"
+                                value={experience}
+                                onChange={(e) => setExperience(e.currentTarget.value)}
+                            />
+                        </div>
+
+                        <div className={styles.cvItem}>
+                            <h1>Теги</h1>
+                            <CustomInput
+                                type="text"
+                                placeholder="Введите теги"
+                                value={tags}
+                                onChange={(e) => setTags(e.currentTarget.value)}
+                            />
                         </div>
 
                         <CustomButton color="dark" onClick={() => {
-                            if (user) {
+                            if (user && skills && aboutInfo && phoneNumber && experience && tags) {
                                 dispatch(addCard({
-                                    id: Date.now(),
-                                    userId: user.id,
-                                    heading: `${user.name + ' ' + user.lastname}`,
-                                    speciality: selectedSpeciality,
+                                    fullName: user.fullName,
+                                    profession: selectedSpeciality,
+                                    tag: tags,
+                                    information: aboutInfo,
+                                    phoneNumber: phoneNumber,
+                                    email: user.contact,
                                     course: user.course,
-                                    telegram: user.telegram,
+                                    login: user.login,
+                                    password: user.password,
                                     skills: skills,
                                     additionalInfo: additionalInfo,
-                                    socials: links,
-                                    updateDate: new Date().toISOString().split('T')[0],
-                                }))
+                                    contactInfo: user.contact,
+                                    experienceYears: Number(experience)
+                                  }))
                                 
                                 navigate('/profile')
                             }

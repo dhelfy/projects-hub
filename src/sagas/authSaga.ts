@@ -1,31 +1,18 @@
 import {call, put, takeLatest} from "typed-redux-saga"
 import { PayloadAction } from "@reduxjs/toolkit";
 import { login, loginFailure, loginSuccess } from "../state/slices/authSlice.ts";
-import { getUserByLogin } from "../API/userAPI.ts";
+import { onLogin } from "../API/authAPI.ts";
 
 function* workAuth(action: PayloadAction<{login: string, password: string}>) {
     try {
         const user = {login: action.payload.login, password: action.payload.password}
-        const foundUser = yield* call(getUserByLogin, user.login)
+        const response = yield* call(onLogin, user.login, user.password)
 
-        if (!foundUser) {
-            yield put(loginFailure("Пользователь не найден"))
-            return
+        if (response.status === 200) {
+            yield put(loginSuccess({login: user.login}))
         }
-
-        if (foundUser.password !== user.password) {
-            yield put(loginFailure("Неверный пароль"))
-            return
-        }
-
-        if(foundUser) {
-            if(foundUser.password === user.password) {
-                yield put(loginSuccess({login: user.login}))
-            }
-        }
-
     } catch (error) {
-        yield put(loginFailure("Произошла ошибка. Попробуйте позже."));
+        yield put(loginFailure("Неверный логин или пароль"));
     }
 }
 

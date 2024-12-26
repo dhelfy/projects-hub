@@ -1,22 +1,22 @@
 import {call, put, takeLatest, select} from "typed-redux-saga"
-import { getProjectById } from "../API/projectsAPI.ts";
+import { getProjectByName } from "../API/projectsAPI.ts";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { fetchProjectSuccess, fetchProjectFailure, fetchProject } from "../state/slices/projectPageSlice.ts";
 import { IProjectCard } from "../types/types.ts";
 import { selectAllProjects } from "../state/selectors/projectsSelector.ts";
 
-function* workFetchProject(action: PayloadAction<number>): Generator<unknown, void> {
+function* workFetchProject(action: PayloadAction<string>): Generator<unknown, void> {
     try {
-        const id = action.payload;
+        const name = action.payload;
 
         // Проверяем наличие проекта в Redux
         const allProjects: IProjectCard[] = yield* select(selectAllProjects);
-        const project = allProjects.find((proj) => proj.id === id);
+        const project = allProjects.find((proj) => proj.name === name);
 
         if (project) {
             yield put(fetchProjectSuccess(project)); // Если проект найден в Redux
         } else {
-            const fetchedProject = yield* call(getProjectById, id); // Если нет, запрашиваем через API
+            const fetchedProject = yield* call(getProjectByName, name); // Если нет, запрашиваем через API
 
             if (!fetchedProject) {
                 throw new Error("Project not found");
